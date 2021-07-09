@@ -2,6 +2,7 @@
 #include <gtkmm/grid.h>
 #include <gtkmm/button.h>
 #include <gtkmm/aboutdialog.h>
+#include <iostream>
 #include "Application.hpp"
 #include "Version.hpp"
 #include "Settings.hpp"
@@ -108,6 +109,18 @@ bool MainWindow::on_key_press_event(GdkEventKey* keyEvent)
                 return true;
             }
             break;
+
+        case GDK_KEY_V:
+        case GDK_KEY_v:
+            if (keyEvent->state & GDK_CONTROL_MASK)
+            {
+                auto clipboard = get_clipboard(gdk_atom_name(GDK_SELECTION_CLIPBOARD));
+                if (auto const image = clipboard->wait_for_image(); image)
+                {
+                    std::cerr << image->get_pixels() << std::endl;
+                    m_webView.uploadBytes(g_bytes_new(image->get_pixels(), image->get_byte_length()), "image/x-rgb");
+                }
+            }
 
         default:
             break;

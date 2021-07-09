@@ -7,7 +7,7 @@
 
 namespace
 {
-    constexpr auto const WHATSAPP_WEB_URI = "https://web.whatsapp.com/";
+    constexpr auto const WHATSAPP_WEB_URI = "https://web.whatsapp.com";
 
 
     std::string systemLanguage()
@@ -202,6 +202,11 @@ double WebView::getZoomLevel() const noexcept
 std::string WebView::getZoomLevelString() const noexcept
 {
     return std::to_string(static_cast<int>(std::round(getZoomLevel() * 100))).append("%");
+}
+
+void WebView::uploadBytes(GBytes* bytes, gchar const* mimeType)
+{
+    webkit_web_view_load_bytes(*this, bytes, mimeType, "UTF-8", WHATSAPP_WEB_URI);
 }
 
 sigc::signal<void, bool> WebView::signalNotification() const noexcept

@@ -19,6 +19,7 @@ class WebView
         void        zoomOut();
         double      getZoomLevel() const noexcept;
         std::string getZoomLevelString() const noexcept;
+        void        uploadBytes(GBytes* bytes, gchar const* mimeType);
 
     public:
         sigc::signal<void, bool> signalNotification() const noexcept;
