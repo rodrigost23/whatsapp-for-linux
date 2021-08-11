@@ -55,6 +55,8 @@ modules:
         url: http://ftp.gnome.org/pub/GNOME/sources/gtkmm/3.22/gtkmm-3.22.3.tar.xz
         sha256: 178c2728a4f37eae986eabdd758547cd7579d15000048596fa6bbc25cbba5c90
 
+  - "shared-modules/libappindicator/libappindicator-gtk3-12.10.json"
+
   - name: whatsapp-for-linux
     buildsystem: cmake-ninja
     sources:
