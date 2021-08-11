@@ -57,6 +57,11 @@ building (You'll probably need administrator privileges for this).
 
 Run `dpkg-buildpackage -uc -us -ui`.
 
+### Flatpak
+
+1. Create a build directory and go into it. `mkdir -p build && cd build`
+2. Run `flatpak-builder flatpak ../flatpak/com.github.whatsapp-for-linux.yml`.
+
 ### Snap
 
 Run `snapcraft`. Pass `--use-lxd` option in a virtual environment.
