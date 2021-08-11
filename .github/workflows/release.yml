@@ -37,6 +37,13 @@ jobs:
         id: snapcraft
         uses: snapcore/action-build@v1
 
+      - name: Build Flatpak Package
+        id: flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: whatsapp-for-linux.flatpak
+          manifest-path: flatpak/com.github.whatsapp-for-linux.yml
+
       - name: Push Tag
         id: push-tag
         uses: anothrNick/github-tag-action@1.33.0
@@ -84,3 +91,14 @@ jobs:
           asset_path: ${{ steps.snapcraft.outputs.snap }}
           asset_name: ${{ steps.snapcraft.outputs.snap }}
           asset_content_type: application/snap
+
+      - name: Upload Fatpak Package
+        id: upload-flatpak-package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: "../whatsapp-for-linux.flatpak"
+          asset_name: "whatsapp-for-linux_${{ env.RELEASE_NAME }}.flatpak"
+          asset_content_type: application/flatpak
